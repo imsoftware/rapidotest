@@ -47,11 +47,6 @@ paths:
                   $ref: '#/components/schemas/rentalRequest'
       operationId: get-rentals
       description: Ausleihe Historie
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
     post:
       summary: ''
       operationId: post-rentals
@@ -90,11 +85,19 @@ paths:
         name: rentalId
         in: path
         required: true
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-rentals-rentalId
+    delete:
+      summary: ''
+      operationId: delete-rentals-rentalId
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      description: Stornieren
   '/rentals/{rentalId}/destinationStation':
     parameters:
       - schema:
@@ -102,11 +105,23 @@ paths:
         name: rentalId
         in: path
         required: true
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-rentals-rentalId-destinationStation
+    patch:
+      summary: ''
+      operationId: patch-rentals-rentalId-destinationStation
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: integer
 components:
   schemas:
     station:
@@ -138,12 +153,10 @@ components:
     error:
       title: error
       type: object
+      description: ''
       properties:
         errorMessage:
           type: string
-        '':
-          type: string
-      description: ''
     rentalHistory:
       title: rentalHistory
       type: object
