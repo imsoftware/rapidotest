@@ -16,20 +16,73 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  latitude:
-                    type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/station'
       operationId: get-stations
       description: Stationsübersicht
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: lat
+          description: Latitude
+        - schema:
+            type: number
+          in: query
+          name: lng
+          description: Longitude
   /rentals:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/rental'
       operationId: get-rentals
+      description: Ausleihe Historie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+    post:
+      summary: ''
+      operationId: post-rentals
+      responses:
+        '201':
+          description: Created
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      description: Ausleihe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rental'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          application/javascript:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+        description: ''
   '/rentals/{rentalId}':
     parameters:
       - schema:
@@ -59,6 +112,7 @@ components:
     station:
       title: station
       type: object
+      description: ''
       properties:
         id:
           type: integer
@@ -68,5 +122,25 @@ components:
           type: number
         longitude:
           type: number
-        bikecount:
+        availableBikes:
           type: integer
+    rental:
+      title: rentalreq
+      type: object
+      description: ''
+      properties:
+        startStation:
+          type: string
+        destinationStation:
+          type: string
+        bikeNumber:
+          type: string
+    error:
+      title: error
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        '':
+          type: string
+      description: ''
