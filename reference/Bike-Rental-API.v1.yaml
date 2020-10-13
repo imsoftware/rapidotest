@@ -5,6 +5,68 @@ info:
   termsOfService: 'https://db.de'
 servers:
   - url: 'https://api.db.de/bikerental/v1'
-paths: {}
+paths:
+  /stations:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  latitude:
+                    type: string
+      operationId: get-stations
+      description: Stationsübersicht
+  /rentals:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-rentals
+  '/rentals/{rentalId}':
+    parameters:
+      - schema:
+          type: string
+        name: rentalId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-rentals-rentalId
+  '/rentals/{rentalId}/destinationStation':
+    parameters:
+      - schema:
+          type: string
+        name: rentalId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-rentals-rentalId-destinationStation
 components:
-  schemas: {}
+  schemas:
+    station:
+      title: station
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        bikecount:
+          type: integer
