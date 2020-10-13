@@ -44,7 +44,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/rentalRequest'
+                  $ref: '#/components/schemas/rentalHistory'
       operationId: get-rentals
       description: Ausleihe Historie
     post:
