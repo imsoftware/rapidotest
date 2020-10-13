@@ -1,0 +1,10 @@
+openapi: 3.0.0
+info:
+  title: Bike Rental API
+  version: '1.0'
+  termsOfService: 'https://db.de'
+servers:
+  - url: 'https://api.db.de/bikerental/v1'
+paths: {}
+components:
+  schemas: {}
