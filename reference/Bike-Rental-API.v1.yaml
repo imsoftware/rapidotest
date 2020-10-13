@@ -140,7 +140,7 @@ components:
         availableBikes:
           type: integer
     rentalRequest:
-      title: rentalreq
+      title: rentalRequest
       type: object
       description: ''
       properties:
